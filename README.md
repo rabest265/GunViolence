@@ -3,7 +3,7 @@
 ## Datasets
 
 US Gun Violence January 2013-2018 
- https://www.kaggle.com/jameslko/gun-violence-data#gun-violence-data_01-2013_03-2018.csv
+https://www.kaggle.com/jameslko/gun-violence-data#gun-violence-data_01-2013_03-2018.csv
 
 Fatal Police shooting 2015- (with census data)
 https://www.kaggle.com/kwullum/fatal-police-shootings-in-the-us#PoliceKillingsUS.csv
