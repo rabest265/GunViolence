@@ -31,3 +31,12 @@ We are interested in investigating the incidents of gun violence in relation to 
 
 ### Sketch
 ![sketch](images/Sketch.png)
+
+### Insperations
+1.
+![Dashboard](images/content_executive-dashboard.png)
+
+2.
+![Word_Cloud](images/word_cloud.png)
+
+3.
