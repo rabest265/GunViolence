@@ -9,7 +9,7 @@ Mary Phillipuk, Rachel Berkowitz, Kathleen Freeberg, Huma Ghiya
 
 A dashboard with multiple charts, possibly custom D3 charts, comparing gun violence incidents in relation to census data and income demographics, firearm provisions by state, active firearm licenses and fatal police shootings
 
-## Datasets
+### Datasets
 
 US Gun Violence January 2013-2018 
 
