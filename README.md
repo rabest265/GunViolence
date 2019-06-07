@@ -1,9 +1,7 @@
 # GunViolence
 
-Mary Phillipuk
-Rachel Berkowitz
-Kathleen Freeberg
-Huma Ghiya
+### Authors
+Mary Phillipuk, Rachel Berkowitz, Kathleen Freeberg, Huma Ghiya
 
 ## Project Overview
 
