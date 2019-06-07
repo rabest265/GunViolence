@@ -1,5 +1,16 @@
 # GunViolence
 
+Mary Phillipuk
+Rachel Berkowitz
+Kathleen Freeberg
+Huma Ghiya
+
+## Project Overview
+
+### Gun Violence in the United States
+
+A dashboard with multiple charts, possibly custom D3 charts, comparing gun violence incidents in relation to census data and income demographics, firearm provisions by state, active firearm licenses and fatal police shootings
+
 ## Datasets
 
 US Gun Violence January 2013-2018 
