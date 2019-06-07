@@ -1,4 +1,4 @@
-# GunViolence
+# Gun Violence
 
 ### Authors
 Mary Phillipuk, Rachel Berkowitz, Kathleen Freeberg, Huma Ghiya
