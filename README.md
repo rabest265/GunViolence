@@ -20,10 +20,10 @@ A dashboard with multiple charts, possibly custom D3 charts, comparing gun viole
   Insightful and vast USA Statistics – Homeowner information based on mortgages  \
   https://www.kaggle.com/goldenoakresearch/us-acs-mortgage-equity-loans-rent-statistics#Income_Methodology.pdf 
 
-  Census Data 2012-2016  \
+  Census Data 2012-2016  
 
-  Mass shootings 1966-2017  
-  https://www.kaggle.com/zusmani/us-mass-shootings-last-50-years \ 
+  Mass shootings 1966-2017  \
+  https://www.kaggle.com/zusmani/us-mass-shootings-last-50-years 
 
   Firearm provisions by state 1991-2017  \
   https://www.kaggle.com/jboysen/state-firearms  
