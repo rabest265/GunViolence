@@ -28,3 +28,6 @@ We are interested in investigating the incidents of gun violence in relation to 
 
   Firearm Licenses - Active firearm sales licenses in the United States \
   https://www.kaggle.com/doj/federal-firearm-licensees
+
+### Sketch
+![sketch](images/Sketch.png)
