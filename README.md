@@ -7,7 +7,7 @@ Mary Phillipuk, Rachel Berkowitz, Kathleen Freeberg, Huma Ghiya
 
 ### Gun Violence in the United States
 
-A dashboard with multiple charts, possibly custom D3 charts, comparing gun violence incidents in relation to census data and income demographics, firearm provisions by state, active firearm licenses, fatal police shootings and time of year.
+We are interested in investigating the incidents of gun violence in relation to income demographics, firearm provisions by state, active firearm licenses, fatal police shootings and time of year. To demonstrate our findings we will be creating a dashboard with multiple charts and maps that will be updatable with selection controls, possibly including custom D3 charts.  
 
 ### Datasets
 
@@ -19,8 +19,6 @@ A dashboard with multiple charts, possibly custom D3 charts, comparing gun viole
 
   Insightful and vast USA Statistics – Homeowner information based on mortgages  \
   https://www.kaggle.com/goldenoakresearch/us-acs-mortgage-equity-loans-rent-statistics#Income_Methodology.pdf 
-
-  Census Data 2012-2016  
 
   Mass shootings 1966-2017  \
   https://www.kaggle.com/zusmani/us-mass-shootings-last-50-years 
