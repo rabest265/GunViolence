@@ -7,12 +7,12 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='
 
 var url = "/jsonifiedstates";
 d3.json(url, function(response) {
-
+  console.log(response);
 
   for (var i = 0; i < response.length; i++) {
-    var state  = response[i].State.toLowerCase();
-    var population = response[i].Population;
-    var income = response[i]['Median Income'];
+    var state  = response[i].state.toLowerCase();
+    var population = response[i]['pop_estimate_2015'];
+    var income = response[i]['2015_median_income'];
 
     for (var j = 0; j< statesData.features.length; j++) {
       if (state == statesData.features[j].properties.name.toLowerCase()) {
@@ -25,13 +25,13 @@ d3.json(url, function(response) {
   console.log(statesData);
 
   function getColor(d) {
-    return d > 15 ? '#800026' :
-          d > 14  ? '#BD0026' :
-          d > 13  ? '#E31A1C' :
-          d > 12  ? '#FC4E2A' :
-          d > 11   ? '#FD8D3C' :
-          d > 10   ? '#FEB24C' :
-          d > 1   ? '#FED976' :
+    return d > 75 ? '#800026' :
+          d > 65  ? '#BD0026' :
+          d > 60  ? '#E31A1C' :
+          d > 55  ? '#FC4E2A' :
+          d > 50   ? '#FD8D3C' :
+          d > 45  ? '#FEB24C' :
+          d > 40   ? '#FED976' :
                       '#FFEDA0';
   }
 
@@ -40,7 +40,7 @@ d3.json(url, function(response) {
   function style(data) {
     console.log(data)
     return {
-        fillColor: getColor(data.population/1000000),
+        fillColor: getColor(data.income/1000),
         weight: 2,
         opacity: 1,
         color: 'white',
@@ -50,8 +50,6 @@ d3.json(url, function(response) {
   }
 
   L.geoJson(statesData, {style: style}).addTo(map);
-  // L.geoJson(statesData, {fillColor: getColor(statesData.features.population)}).addTo(map);
-  // console.log(statesData.features.population);
 
   function highlightFeature(e) {
     var layer = e.target;
@@ -104,8 +102,8 @@ d3.json(url, function(response) {
 
   // method that we will use to update the control based on features passed
   info.update = function (feat) {
-      this._div.innerHTML = '<h4>US Population in Millions</h4>' +  (feat ?
-          '<b>' + feat.properties.name + '</b><br />' + feat.population/1000000 + 'M people'
+      this._div.innerHTML = '<h4>US Median Income in Thousands</h4>' +  (feat ?
+          '<b>' + feat.properties.name + '</b><br />' + feat.income/1000 + 'K median income'
           : 'Hover over a state');
   };
 
@@ -116,7 +114,7 @@ d3.json(url, function(response) {
   legend.onAdd = function (map) {
   
       var div = L.DomUtil.create('div', 'info legend'),
-          grades = [0, 1, 10, 11, 12, 13, 14, 15],
+          grades = [0, 40, 45, 50, 55, 60, 65, 75],
           labels = [];
   
       // loop through our density intervals and generate a label with a colored square for each interval
