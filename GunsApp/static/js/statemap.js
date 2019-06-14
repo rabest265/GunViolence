@@ -1,5 +1,5 @@
 var mapboxAccessToken = API_KEY;
-var map = L.map('map').setView([37.8, -96], 4);
+var map = L.map('map').setView([38, -96], 5);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
     id: 'mapbox.light'
@@ -25,14 +25,14 @@ d3.json(url, function(response) {
   console.log(statesData);
 
   function getColor(d) {
-    return d > 75 ? '#800026' :
-          d > 65  ? '#BD0026' :
-          d > 60  ? '#E31A1C' :
-          d > 55  ? '#FC4E2A' :
-          d > 50   ? '#FD8D3C' :
-          d > 45  ? '#FEB24C' :
-          d > 40   ? '#FED976' :
-                      '#FFEDA0';
+    return d > 75 ? '#000099' :
+          d > 65  ? '#0000cc' :
+          d > 60  ? '#0000ff' :
+          d > 55  ? '#3333ff' :
+          d > 50  ? '#6666ff' :
+          d > 45  ? '#9999ff' :
+          d > 40  ? '#ccccff' :
+                    '#e6e6ff';
   }
 
   L.geoJson(statesData).addTo(map);
