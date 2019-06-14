@@ -28,7 +28,13 @@ We are interested in investigating the incidents of gun violence in relation to 
 
   Firearm Licenses - Active firearm sales licenses in the United States \
   https://www.kaggle.com/doj/federal-firearm-licensees
-
+  
+  Census.gov\
+  Median income\
+  https://census.gov/data/tables/time-series/demo/income-poverty/historical-income-households.html
+  
+  US population
+  
 ### Sketch
 ![sketch](images/Sketch.png)
 
