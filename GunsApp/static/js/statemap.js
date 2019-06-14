@@ -3,8 +3,12 @@ var map = L.map('map').setView([38, -96], 5);
 var ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
 
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
-    id: 'mapbox.light'
+// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
+//     id: 'mapbox.light'
+// }).addTo(map);
+
+var positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+        attribution: '©OpenStreetMap, ©CartoDB'
 }).addTo(map);
 
 var url = "/jsonifiedstates";
@@ -104,7 +108,7 @@ d3.json(url, function(response) {
 
   // method that we will use to update the control based on features passed
   info.update = function (feat) {
-      this._div.innerHTML = '<h4>2015 US Median Income in Thousands</h4>' +  (feat ?
+      this._div.innerHTML = '<h4>2015 US Median Income in Thousands</h4> </li> <b>Click on marker for more details</li> </br><br />' +  (feat ?
           '<b>' + feat.properties.name + '</b><br />' + feat.income/1000 + 'K median income'
           : 'Hover over a state');
   };
@@ -116,8 +120,8 @@ d3.json(url, function(response) {
   legend.onAdd = function (map) {
   
       var div = L.DomUtil.create('div', 'info legend'),
-          grades = [0, 40, 45, 50, 55, 60, 65, 75],
-          labels = [];
+          grades = [0, 40, 45, 50, 55, 60, 65, 75];
+          // labels = [];
   
       // loop through our density intervals and generate a label with a colored square for each interval
       for (var i = 0; i < grades.length; i++) {
