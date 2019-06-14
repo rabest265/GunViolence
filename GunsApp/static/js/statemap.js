@@ -102,7 +102,7 @@ d3.json(url, function(response) {
 
   // method that we will use to update the control based on features passed
   info.update = function (feat) {
-      this._div.innerHTML = '<h4>US Median Income in Thousands</h4>' +  (feat ?
+      this._div.innerHTML = '<h4>2015 US Median Income in Thousands</h4>' +  (feat ?
           '<b>' + feat.properties.name + '</b><br />' + feat.income/1000 + 'K median income'
           : 'Hover over a state');
   };
@@ -129,7 +129,37 @@ d3.json(url, function(response) {
   
   legend.addTo(map);
 
+  
+  // Assemble guns URL
+  var newurl = "/jsonifiedguns";
 
+  // Grab the data with d3
+  d3.json(newurl, function(response2) {
+
+    // Create a new marker cluster group
+    var markers = L.markerClusterGroup();
+
+    // Loop through data
+    for (var i = 0; i < response2.length; i++) {
+
+      // Set the data location property to a variable
+      var lat = response2[i].latitude;
+      var lng = response2[i].longitude;
+
+      // Check for location property
+      if (lat) {
+
+        // Add a new marker to the cluster group and bind a pop-up
+        markers.addLayer(L.marker([lat, lng])
+          .bindPopup(response2[i].incident_characteristics));
+      }
+
+    }
+
+    // Add our marker cluster layer to the map
+    map.addLayer(markers);
+
+  });
 
 
 })
