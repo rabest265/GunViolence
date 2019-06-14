@@ -1,5 +1,7 @@
 var mapboxAccessToken = API_KEY;
 var map = L.map('map').setView([38, -96], 5);
+var ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
+
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
     id: 'mapbox.light'
@@ -22,7 +24,7 @@ d3.json(url, function(response) {
     }  
   }
 
-  console.log(statesData);
+  // console.log(statesData);
 
   function getColor(d) {
     return d > 75 ? '#000099' :
@@ -38,7 +40,7 @@ d3.json(url, function(response) {
   L.geoJson(statesData).addTo(map);
 
   function style(data) {
-    console.log(data)
+    // console.log(data)
     return {
         fillColor: getColor(data.income/1000),
         weight: 2,

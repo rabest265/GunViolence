@@ -9,9 +9,13 @@ app = Flask(__name__)
 # Use PyMongo to establish Mongo connection
 mongo = PyMongo(app, uri="mongodb://localhost:27017/guns")
 
+# Define shooting list
+# ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
+
+
 @app.route("/")
 def home():
-    return  render_template("index.html")
+    return  render_template("index.html", ShootList = ShootList)
 
 @app.route("/jsonifiedcities")
 def jsonifiedcities():
@@ -28,7 +32,8 @@ def jsonifiedguns():
     guninfo =  mongo.db.guns.find()
     for gun in guninfo:
         del gun["_id"]
-        gunlist.append(gun)
+        if gun["shoot_type"] in ShootList:
+            gunlist.append(gun) 
     return jsonify(gunlist)
 
 @app.route("/jsonifiedstates")
