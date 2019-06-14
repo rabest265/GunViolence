@@ -10,7 +10,7 @@ app = Flask(__name__)
 mongo = PyMongo(app, uri="mongodb://localhost:27017/guns")
 
 # Define shooting list
-# ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
+ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
 
 
 @app.route("/")
