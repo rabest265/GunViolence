@@ -15,7 +15,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 var url = "/jsonifiedcities";
 d3.json(url, function(response) {
 
-  console.log(response);
+  // console.log(response);
 
   var heatArray = [];
 
@@ -25,15 +25,15 @@ d3.json(url, function(response) {
     var income = response[i]['Median Income'];
     var poverty = response[i].poverty_rate;
   
-    var select = "income"
+    var select = "poverty"
  
     var data = poverty;
-    var nblur = 25
+    var nblur = 0.00001
     if (select =="income"){
       data = income;
       nblur = 9;
     }
-
+    console.log (nblur);
     if (lat) {
       heatArray.push([lat, lng, data]);
     }
