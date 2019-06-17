@@ -45,5 +45,14 @@ def jsonifiedstates():
         statelist.append(state)
     return jsonify(statelist)
 
+@app.route("/jsonifiedsummary")
+def jsonifiedsummary():
+    summarylist = []
+    summaryinfo =  mongo.db.guns_summary.find()
+    for shoot_type in summaryinfo:
+        del shoot_type["_id"]
+        summarylist.append(shoot_type)
+    return jsonify(summarylist)
+
 if __name__ == "__main__":
     app.run(debug=True)
