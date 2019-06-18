@@ -1,11 +1,6 @@
-var mapboxAccessToken = API_KEY;
+
 var map = L.map('map').setView([38, -96], 5);
 var ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
-
-
-// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
-//     id: 'mapbox.light'
-// }).addTo(map);
 
 var positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
         attribution: '©OpenStreetMap, ©CartoDB'
