@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, jsonify
 from flask_pymongo import PyMongo
+from datetime import datetime
 import json
 # from bson.json_util import loads
 
@@ -16,6 +17,11 @@ ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
 @app.route("/")
 def home():
     return  render_template("index.html", ShootList = ShootList)
+
+@app.route("/charts")
+def charts():
+   return  render_template("charts.html", ShootList = ShootList)
+ 
 
 @app.route("/jsonifiedcities")
 def jsonifiedcities():
@@ -35,6 +41,19 @@ def jsonifiedguns():
         if gun["shoot_type"] in ShootList:
             gunlist.append(gun) 
     return jsonify(gunlist)
+
+@app.route("/jsonifiedgunsy/<yr>")
+def jsonifiedgunsy(yr):
+    gunlist = []
+    guninfo =  mongo.db.guns.find({ "year": int(yr) })
+    #guninfo =  mongo.db.guns.find()
+    for gun in guninfo:
+        del gun["_id"]
+        if gun["shoot_type"] in ShootList:
+            gunlist.append(gun) 
+        print(len(gunlist))
+    return jsonify(gunlist)
+
 
 @app.route("/jsonifiedstates")
 def jsonifiedstates():
