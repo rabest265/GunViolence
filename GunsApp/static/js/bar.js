@@ -17,43 +17,55 @@ d3.json(url).then(function(response) {
     // 2: "no injuries"
     // 3: "some dead"
 
-    console.log(incidents[0]);
-    var value = incidents[0];
+  var url2 = "/jsonifiedstatesummary";
+  d3.json(url2).then(function(response2) {
+    console.log(response2);
+    var shoot_type2 = [];
+    var incidents2 = [];
 
-  var trace1 = {
-    x: ['benchmark'],
-    y: [incidents[2]],
-    name: shoot_type[2],
-    type: 'bar'
-  };
+    for(var j=0; j < response2.length; j++) {
+      shoot_type2.push(response2[j].shoot_type);
+      incidents2.push(response2[j].Incidents_per_100M);
+    }
 
-  var trace2 = {
-    x: ['benchmark'],
-    y: [incidents[0]],
-    name: shoot_type[0],
-    type: 'bar'
-  };
+    console.log(shoot_type2);
+    console.log(incidents2);
 
-  var trace3 = {
+    var trace1 = {
       x: ['benchmark'],
-      y: [incidents[3]],
-      name: shoot_type[3],
+      y: [incidents[2]],
+      name: shoot_type[2],
       type: 'bar'
-  };
+    };
 
-  var trace4 = {
-    x: ['benchmark'],
-    y: [incidents[1]],
-    name: shoot_type[1],
-    type: 'bar'
-  };
+    var trace2 = {
+      x: ['benchmark'],
+      y: [incidents[0]],
+      name: shoot_type[0],
+      type: 'bar'
+    };
 
-  var data = [trace1, trace2, trace3, trace4];
+    var trace3 = {
+        x: ['benchmark'],
+        y: [incidents[3]],
+        name: shoot_type[3],
+        type: 'bar'
+    };
 
-  var layout = {
-    barmode: 'stack',
-    title: "# of Incidents per 100M people",
-  };
+    var trace4 = {
+      x: ['benchmark'],
+      y: [incidents[1]],
+      name: shoot_type[1],
+      type: 'bar'
+    };
 
-  Plotly.newPlot('plot', data, layout);
+    var data = [trace1, trace2, trace3, trace4];
+
+    var layout = {
+      barmode: 'stack',
+      title: "# of Incidents per 100M people",
+    };
+
+    Plotly.newPlot('plot', data, layout);
+  });
 });
