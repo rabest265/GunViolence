@@ -9,6 +9,18 @@ Mary Phillipuk, Rachel Berkowitz, Kathleen Freeberg, Huma Ghiya
 
 We are interested in investigating the incidents of gun violence in relation to income demographics, firearm provisions by state, active firearm licenses, fatal police shootings and time of year. To demonstrate our findings we will be creating a dashboard with multiple charts and maps that will be updatable with selection controls, possibly including custom D3 charts.  
 
+### Steps To Run 
+
+1.	Download the git repository
+2.	Use terminal to navigate the "Code" folder and run the Jupyter Notebook 
+3.	Open a terminal and start mongod
+4.	Open mongo_all.ipynb in Jupyter Notebook and Restart the kernel and run through all the data steps
+4.	Make sure mongod is still running in terminal
+5.	In a new terminal window navigate to the GunViolence/GunsApp and run "Python app.py"
+6.	When app starts go to http://127.0.0.1:5000/
+
+
+
 ### Datasets
 
   US Gun Violence January 2013-2018 \
