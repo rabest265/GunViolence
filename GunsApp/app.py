@@ -18,9 +18,19 @@ ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
 def home():
     return  render_template("index.html", ShootList = ShootList)
 
-@app.route("/charts")
+@app.route("/maps")
 def charts():
-   return  render_template("charts.html", ShootList = ShootList)
+   return  render_template("maps.html", ShootList = ShootList)
+
+@app.route("/benchmark")
+def bench():
+   return  render_template("benchmark.html", ShootList = ShootList)
+
+
+@app.route("/interactive_chart")
+def intercharts():
+   return  render_template("interactive_chart.html", ShootList = ShootList)
+
  
 
 @app.route("/jsonifiedcities")
