@@ -52,7 +52,7 @@ def jsonifiedguns():
             gunlist.append(gun) 
     return jsonify(gunlist)
 
-@app.route("/jsonifiedgunsy/<yr>")
+@app.route("/jsonifiedguns/<yr>")
 def jsonifiedgunsy(yr):
     gunlist = []
     guninfo =  mongo.db.guns.find({ "year": int(yr) })

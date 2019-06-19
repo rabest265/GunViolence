@@ -1,14 +1,26 @@
-
-var map = L.map('map').setView([38, -96], 5);
+var mapboxAccessToken = API_KEY;
 var ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
+
+
+// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
+//     id: 'mapbox.light'
+// }).addTo(map);
 
 var positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
         attribution: '©OpenStreetMap, ©CartoDB'
-}).addTo(map);
+});//.addTo(map);
+
+// Create a new map
+var myMap = L.map("map", {
+  center: [
+    37.09, -95.71
+  ],
+  zoom: 4,
+  layers: [positron]
+});
 
 var url = "/jsonifiedstates";
 d3.json(url, function(response) {
-  console.log(response);
 
   for (var i = 0; i < response.length; i++) {
     var state  = response[i].state.toLowerCase();
@@ -23,43 +35,41 @@ d3.json(url, function(response) {
     }  
   }
 
-  // console.log(statesData);
 
   function getColor(d) {
-    return d > 75 ? '#000099' :
-          d > 65  ? '#0000cc' :
-          d > 60  ? '#0000ff' :
-          d > 55  ? '#3333ff' :
-          d > 50  ? '#6666ff' :
-          d > 45  ? '#9999ff' :
-          d > 40  ? '#ccccff' :
-                    '#e6e6ff';
+    var myColor = d3.scaleSequential().domain([1,8]).interpolator(d3.interpolatePuBu);
+    return d > 75 ? myColor(8) ://'#000099' :
+          d > 65  ? myColor(7) ://'#0000cc' :
+          d > 60  ? myColor(6) ://'#0000ff' :
+          d > 55  ? myColor(5) ://'#3333ff' :
+          d > 50  ? myColor(4) ://'#6666ff' :
+          d > 45  ? myColor(3) ://'#9999ff' :
+          d > 40  ? myColor(2) ://'#ccccff' :
+                    myColor(1);//'#e6e6ff';
   }
 
-  L.geoJson(statesData).addTo(map);
+  
 
   function style(data) {
-    // console.log(data)
     return {
         fillColor: getColor(data.income/1000),
         weight: 2,
         opacity: 1,
         color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.3
+        dashArray: '',
+        fillOpacity: 0.5
     };
   }
 
-  L.geoJson(statesData, {style: style}).addTo(map);
 
   function highlightFeature(e) {
     var layer = e.target;
   
     layer.setStyle({
-        weight: 5,
+        weight: 1,
         color: '#666',
         dashArray: '',
-        fillOpacity: 0.5
+        fillOpacity: 0.7
     });
   
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -73,11 +83,10 @@ d3.json(url, function(response) {
     info.update();
   }
 
-  var geojson;
-  geojson = L.geoJson(statesData, {style: style}).addTo(map);
+  
 
   function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
+    myMap.fitBounds(e.target.getBounds());
   }
 
   function onEachFeature(feature, layer) {
@@ -88,12 +97,12 @@ d3.json(url, function(response) {
     });
   }
 
-  geojson = L.geoJson(statesData, {
+  var geojson = L.geoJson(statesData, {
       style: style,
       onEachFeature: onEachFeature
-  }).addTo(map);
+  }).addTo(myMap);
 
-  var info = L.control();
+  var info = L.control({position: 'bottomleft'});
 
   info.onAdd = function (map) {
       this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
@@ -103,12 +112,12 @@ d3.json(url, function(response) {
 
   // method that we will use to update the control based on features passed
   info.update = function (feat) {
-      this._div.innerHTML = '<h4>2015 US Median Income in Thousands</h4> </li> <b>Click on marker for more details</li> </br><br />' +  (feat ?
+      this._div.innerHTML = '<h4>2015 US Median Income</h4>' +  (feat ?
           '<b>' + feat.properties.name + '</b><br />' + feat.income/1000 + 'K median income'
-          : 'Hover over a state');
+          : '<br>Hover over a state');
   };
 
-  info.addTo(map);
+  
 
   var legend = L.control({position: 'bottomright'});
 
@@ -122,45 +131,72 @@ d3.json(url, function(response) {
       for (var i = 0; i < grades.length; i++) {
           div.innerHTML +=
               '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-              grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+              grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + 'K<br>' : 'K +');
       }
   
       return div;
   };
-  
-  legend.addTo(map);
+  info.addTo(myMap);
+  legend.addTo(myMap);
 
   
+
   // Assemble guns URL
-  var newurl = "/jsonifiedguns";
+  var yr=2014;
 
+  
+  getViolence(yr);
+
+function getViolence(yr){
+
+  var newurl = "/jsonifiedguns/"+yr;
   // Grab the data with d3
+  $('.mapstat').html("Loading "+yr+" data...");
   d3.json(newurl, function(response2) {
-
-    // Create a new marker cluster group
     var markers = L.markerClusterGroup();
+    var len=response2.length;
+    response2.forEach(function(el,i){
+        var loc = [+el.latitude,+el.longitude];
+        var mstr=el.incident_characteristics || "";
+        mstr=mstr.split("||").join("</br>");
+        var dt = el.date;
+        // Check for location property
+        if (el.latitude) {
 
-    // Loop through data
-    for (var i = 0; i < response2.length; i++) {
+          // Add a new marker to the cluster group and bind a pop-up
+          markers.addLayer(L.marker(loc)
+            .bindPopup("<h3><span>"+dt+"</span><br>"+el.n_killed+" killed<br>"+el.n_killed+" injured</h3>"+mstr));
+        }
+      });
 
-      // Set the data location property to a variable
-      var lat = response2[i].latitude;
-      var lng = response2[i].longitude;
+    myMap.addLayer(markers);
+    $('.mapstat').html(len+" incidents in "+yr);
 
-      // Check for location property
-      if (lat) {
+    // Define a baseMaps object to hold our base layers
+    // var baseMaps = {
+    //   "Map": positron
+    // };
 
-        // Add a new marker to the cluster group and bind a pop-up
-        markers.addLayer(L.marker([lat, lng])
-          .bindPopup(response2[i].incident_characteristics));
-      }
+    // var overlayMaps = {};
+    // overlayMaps[yr+" Incidents"]= markers;
+    
 
-    }
+    // var options = {
+    //   collapsed: false
+    // };
 
-    // Add our marker cluster layer to the map
-    map.addLayer(markers);
+    // Create a layer control containing our baseMaps
+    //var layerscontrol=L.control.layers(baseMaps, overlayMaps, options).addTo(myMap);
 
+    $('ul.yearbtns li').off('mousedown touchstart').on('mousedown touchstart',function(e){
+        e.preventDefault();
+        $(this).addClass('mactive').siblings('li').removeClass('mactive');
+        myMap.removeLayer(markers);
+        markers=undefined;
+        getViolence($(this).text());
+    });
+    
   });
 
-
+  }
 })
