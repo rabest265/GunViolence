@@ -40,8 +40,42 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="box">
-                            <h1>Plotting Gun Violence</h1>
-                            <p>Here is another plot for your purposes</p>
+                            <h1>Comparing State Gun Laws</h1>
+                            <p>Select from dropdowns to see how laws compare to the national benchmark</p>
+                              
+                              <select class="filterdown" id="longgun">
+                                  <option value="*" selected="selected">Is there an age restriction?</option>
+                                  <option value="*">All</option>
+                                  <option value= 1 >Must be 18 to own a long gun</option>
+                                  <option value= 0 >No law on age to own a long gun</option>
+                              </select>
+                              <select class="filterdown" id="assault">
+                                  <option value="*" selected="selected">Is there a Ban on Assault Weapons?</option>
+                                  <option value="*">All</option>
+                                  <option value= 1 >There is a ban on assualt weapons</option>
+                                  <option value= 0 >There is no ban on assualt weapons</option>
+                              </select>
+
+                              <select class="filterdown" id="mental">
+                                  <option value="*" selected="selected">Do background checks look at mental health records?</option>
+                                  <option value="*">All</option>
+                                  <option value= 1 >Background checks look at mental health</option>
+                                  <option value= 0 >Background checks do not explicitly check mental health</option>
+                              </select>
+
+                              <select class="filterdown" id="universal">
+                                  <option value="*" selected="selected">Are universal background checks required?</option>
+                                  <option value="*">All</option>
+                                  <option value= 1 >Universal background checks required for all purchases</option>
+                                  <option value= 0 >Universal background checks are not required</option>
+                              </select>
+
+                              <div id="chartContainer" style="height: 36px; width: 100%;"></div>
+
+
+
+
+
                             
                             <div id="plot"></div>
                             <!--  chart here. -->

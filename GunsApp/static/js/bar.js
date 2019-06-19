@@ -22,6 +22,44 @@ d3.json(url).then(function(response) {
   var url2 = "/jsonifiedstatesummary";
   d3.json(url2).then(function(response2) {
     console.log(response2);
+    // var data = response2;
+
+    var selectlong = `*`;
+
+
+    $( ".filterdown" ).change(function() {
+      var lg = document.getElementById("longgun");
+      var selectLong = lg.options[lg.selectedIndex].value;
+
+      var asst = document.getElementById("assault");
+      var selectAsst = asst.options[asst.selectedIndex].value;
+
+      var ment = document.getElementById("mental");
+      var selectMent = ment.options[ment.selectedIndex].value;
+      
+      var univ = document.getElementById("universal");
+      var selectUniv = univ.options[univ.selectedIndex].value;
+
+      var data = response2;
+
+    // });
+    if (selectLong != "*")
+      var data = data.filter(d=>d.age18longgunpossess == selectLong);
+    if (selectAsst != "*")
+      var data = data.filter(d=>d.assault == selectAsst);
+    if (selectMent != "*")
+      var data = data.filter(d=>d.mentalhealth == selectMent);
+    if (selectUniv != "*")
+      var data = data.filter(d=>d.universal == selectUniv);
+
+
+    var statedata = data.filter(d=>d.shoot_type == "injuries only");
+    var stateCount = statedata.length + " States";
+    console.log(stateCount);
+    
+    console.log(data)
+
+
     var injonly = [];
     var massht = [];
     var noinj = [];
@@ -32,19 +70,19 @@ d3.json(url).then(function(response) {
     var noinjpop = [];
     var deadpop = [];
 
-    for(var j=0; j < response2.length; j++) {
-      if (response2[j].shoot_type == "injuries only")
-        injonly.push(response2[j].Count),
-        injonlypop.push(response2[j].pop_estimate_2015);
-      else if (response2[j].shoot_type == "mass shooting")
-        massht.push(response2[j].Count),
-        masshtpop.push(response2[j].pop_estimate_2015);
-      else if (response2[j].shoot_type == "no injuries")
-        noinj.push(response2[j].Count),
-        noinjpop.push(response2[j].pop_estimate_2015);
-      else if (response2[j].shoot_type == "some dead")
-        dead.push(response2[j].Count),
-        deadpop.push(response2[j].pop_estimate_2015);
+    for(var j=0; j < data.length; j++) {
+      if (data[j].shoot_type == "injuries only")
+        injonly.push(data[j].Count),
+        injonlypop.push(data[j].pop_estimate_2015);
+      else if (data[j].shoot_type == "mass shooting")
+        massht.push(data[j].Count),
+        masshtpop.push(data[j].pop_estimate_2015);
+      else if (data[j].shoot_type == "no injuries")
+        noinj.push(data[j].Count),
+        noinjpop.push(data[j].pop_estimate_2015);
+      else if (data[j].shoot_type == "some dead")
+        dead.push(data[j].Count),
+        deadpop.push(data[j].pop_estimate_2015);
     }
 
     var incidents2 = []; 
@@ -57,28 +95,28 @@ d3.json(url).then(function(response) {
     console.log(incidents2);
 
     var trace1 = {
-      x: ['benchmark','sample'],
+      x: ['All states',stateCount],
       y: [incidents[2], incidents2[2]],
       name: shoot_type[2],
       type: 'bar'
     };
 
     var trace2 = {
-      x: ['benchmark','sample'],
+      x: ['All states',stateCount],
       y: [incidents[0], incidents2[0]],
       name: shoot_type[0],
       type: 'bar'
     };
 
     var trace3 = {
-      x: ['benchmark','sample'],
+      x: ['All states',stateCount],
       y: [incidents[3], incidents2[3]],
       name: shoot_type[3],
       type: 'bar'
     };
 
     var trace4 = {
-      x: ['benchmark','sample'],
+      x: ['All states',stateCount],
       y: [incidents[1], incidents2[1]],
       name: shoot_type[1],
       type: 'bar'
@@ -92,5 +130,8 @@ d3.json(url).then(function(response) {
     };
 
     Plotly.newPlot('plot', data, layout);
+
+    // chart.render()
+  });
   });
 });
