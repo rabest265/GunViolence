@@ -165,7 +165,7 @@ function getViolence(yr){
 
           // Add a new marker to the cluster group and bind a pop-up
           markers.addLayer(L.marker(loc)
-            .bindPopup("<h3><span>"+dt+"</span><br>"+el.n_killed+" killed<br>"+el.n_killed+" injured</h3>"+mstr));
+            .bindPopup("<h3><span>"+dt+"</span><br>"+el.n_killed+" killed<br>"+el.n_injured+" injured</h3>"+mstr));
         }
       });
 

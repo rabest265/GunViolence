@@ -31,7 +31,9 @@ def bench():
 def intercharts():
    return  render_template("interactive_chart.html", ShootList = ShootList)
 
- 
+@app.route("/wordcloud")
+def wordcloud():
+   return  render_template("wordcloud.html", ShootList = ShootList)
 
 @app.route("/jsonifiedcities")
 def jsonifiedcities():
@@ -55,13 +57,16 @@ def jsonifiedguns():
 @app.route("/jsonifiedguns/<yr>")
 def jsonifiedgunsy(yr):
     gunlist = []
-    guninfo =  mongo.db.guns.find({ "year": int(yr) })
-    #guninfo =  mongo.db.guns.find()
+    if(yr=="all"):
+        guninfo =  mongo.db.guns.find()
+    else:
+        guninfo =  mongo.db.guns.find({ "year": int(yr) })
+    
     for gun in guninfo:
         del gun["_id"]
         if gun["shoot_type"] in ShootList:
             gunlist.append(gun) 
-        print(len(gunlist))
+        # print(len(gunlist))
     return jsonify(gunlist)
 
 

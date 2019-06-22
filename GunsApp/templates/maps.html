@@ -14,27 +14,32 @@
   </head>
   <body class="d-flex flex-column">
         <div id="page-content">
-                <nav class="navbar navbar-expand-lg navbar-blue">
-                        <a class="navbar-brand mb-0 h1" href="/">HOME</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                    
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                          <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Charts
-                              </a>
-                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/interactive_chart">Interactive Chart</a>
-                                <a class="dropdown-item" href="/maps">Map</a>
-                                <a class="dropdown-item" href="/benchmark">Benchmark</a>        
-                              </div>
-                            </li>
-                        </ul>
-                    </div>
-                  </nav>
+            <nav class="navbar navbar-expand-sm navbar-dark">
+                <a class="navbar-brand" href="/">Gun Violence in the USA</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                        
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto ">
+                            
+                        <li class="nav-item">
+                          <a class="nav-link" href="/interactive_chart">Factors Chart</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link active" href="/maps">Map of Incidents</a>
+                        </li>
+    
+                        <li class="nav-item">
+                          <a class="nav-link" href="/benchmark">Laws Benchmark</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/wordcloud">Word Cloud</a>
+                        </li>
+                    </ul>
+                </div>
+              </nav>
 
 
 
@@ -43,16 +48,17 @@
                     <div class="col-md-12">
                         <div class="box">
                             <h1>Where does gun violence occur?</h1>
-                            <p>Shootings and gun incidents happen all over the United States, though higher concentrations are evident in highly-populated, urban areas. The map below locates gun incidents in the United States for the years 2014-2017. Choose a year below to map events for that year.</p>
+                            <p>Select a year below to map reported gun incidents for that year. Select a marker or state to zoom in for more detail.</p>
                             <ul class='yearbtns'>
-                                <li class='active'>2014</li>
+                                <li class='mactive'>2014</li>
                                 <li>2015</li>
                                 <li>2016</li>
                                 <li>2017</li>
                             </ul>
                             <div class='mapstat'></div>
                             <div id="map"></div>
-
+                            <br>
+                            <p>Shootings and gun incidents happen all over the United States, though higher concentrations are evident in highly-populated, urban areas. The map above locates gun incidents in the United States for the years 2014-2017, with the total amount of events per year increasing over that period. States are color-coded according to median household income in order to observe the relationship between income and gun incidents. On the state level, there does not appear to be a correlation between income and incidents, though one may exist when examining data at a higher level of detail, such as by neighborhood.</p>
                         </div>
                     </div>
                 </div>
@@ -65,7 +71,7 @@
         
         <footer id="sticky-footer" class="py-4 text-white-50">
             <div class="container text-center">
-                <small>Gun Incident data from <a href='https://openweathermap.org/'>Kaggle</a> accessed 06/07/2019</small>
+                <small>Gun Incident data from <a href='https://www.kaggle.com/jameslko/gun-violence-data'>Kaggle</a> accessed 06/07/2019</small>
             </div>
         </footer>
 

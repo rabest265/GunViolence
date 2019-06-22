@@ -21,13 +21,14 @@ d3.json(url).then(function(response) {
 
   var url2 = "/jsonifiedstatesummary";
   d3.json(url2).then(function(response2) {
-    console.log(response2);
+    // console.log(response2);
     // var data = response2;
 
     var selectlong = `*`;
 
 
     $( ".filterdown" ).change(function() {
+      $('#plot').empty();
       var lg = document.getElementById("longgun");
       var selectLong = lg.options[lg.selectedIndex].value;
 
@@ -54,10 +55,23 @@ d3.json(url).then(function(response) {
 
 
     var statedata = data.filter(d=>d.shoot_type == "injuries only");
-    var stateCount = statedata.length + " States";
-    console.log(stateCount);
+    var slen = statedata.length;
+    var stateCount = slen + ((slen==1)?" State":" States");
+    //console.log('data.length='+data.length+', statedata.length='+slen);
+    var sstr=""
+    if (slen== 0){
+      sstr+="<strong>No states meet the selected criteria.</strong>";
+    }else if (slen < 51){
+      for (var s=0; s<slen; s++){
+        if (s==0) sstr+="<strong>"+slen+((slen>1)?" states meet":" state meets")+" the selected criteria:</strong><br>";
+        else sstr+=", ";
+        sstr+=statedata[s].state;
+
+      }
+    }
+    $('#stateschosen').html(sstr);
     
-    console.log(data)
+    //console.log(data)
 
 
     var injonly = [];
@@ -71,28 +85,32 @@ d3.json(url).then(function(response) {
     var deadpop = [];
 
     for(var j=0; j < data.length; j++) {
-      if (data[j].shoot_type == "injuries only")
-        injonly.push(data[j].Count),
+      if (data[j].shoot_type == "injuries only"){
+        injonly.push(data[j].Count);
         injonlypop.push(data[j].pop_estimate_2015);
-      else if (data[j].shoot_type == "mass shooting")
-        massht.push(data[j].Count),
+      }else if (data[j].shoot_type == "mass shooting"){
+        massht.push(data[j].Count);
         masshtpop.push(data[j].pop_estimate_2015);
-      else if (data[j].shoot_type == "no injuries")
-        noinj.push(data[j].Count),
+      }else if (data[j].shoot_type == "no injuries"){
+        noinj.push(data[j].Count);
         noinjpop.push(data[j].pop_estimate_2015);
-      else if (data[j].shoot_type == "some dead")
-        dead.push(data[j].Count),
+      }else if (data[j].shoot_type == "some dead"){
+        dead.push(data[j].Count);
         deadpop.push(data[j].pop_estimate_2015);
+      }
     }
 
-    var incidents2 = []; 
-    incidents2.push((injonly.reduce((a, b) => a + b, 0)/injonlypop.reduce((a, b) => a + b,))*100000000);
-    incidents2.push((massht.reduce((a, b) => a + b, 0)/masshtpop.reduce((a, b) => a + b,))*100000000);
-    incidents2.push((noinj.reduce((a, b) => a + b, 0)/noinjpop.reduce((a, b) => a + b,))*100000000);
-    incidents2.push((dead.reduce((a, b) => a + b, 0)/deadpop.reduce((a, b) => a + b,))*100000000);
-    
+    if (slen>0){
+      var incidents2 = []; 
+      incidents2.push((injonly.reduce((a, b) => a + b, 0)/injonlypop.reduce((a, b) => a + b,))*100000000);
+      incidents2.push((massht.reduce((a, b) => a + b, 0)/masshtpop.reduce((a, b) => a + b,))*100000000);
+      incidents2.push((noinj.reduce((a, b) => a + b, 0)/noinjpop.reduce((a, b) => a + b,))*100000000);
+      incidents2.push((dead.reduce((a, b) => a + b, 0)/deadpop.reduce((a, b) => a + b,))*100000000);
+    }else{
+      incidents2 = [0,0,0,0];
+    }
 
-    console.log(incidents2);
+    //console.log(incidents2);
 
     var trace1 = {
       x: ['All states',stateCount],
@@ -126,12 +144,17 @@ d3.json(url).then(function(response) {
 
     var layout = {
       barmode: 'stack',
-      title: "# of Incidents per 100M people",
+      title: "# of Incidents per 100M people"
     };
 
     Plotly.newPlot('plot', data, layout);
 
     // chart.render()
   });
+
+  $('#universal').trigger("change");
   });
+  window.onresize = function(){
+    $('#universal').trigger("change");
+  };
 });

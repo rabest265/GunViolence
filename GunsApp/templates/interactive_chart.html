@@ -15,38 +15,47 @@
   <body class="d-flex flex-column">
         <div id="page-content">
         
-                <nav class="navbar navbar-expand-lg navbar-blue">
-                        <a class="navbar-brand mb-0 h1" href="/">HOME</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                    
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                          <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Charts
-                              </a>
-                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/interactive_chart">Interactive Chart</a>
-                                <a class="dropdown-item" href="/maps">Map</a>
-                                <a class="dropdown-item" href="/benchmark">Benchmark</a>        
-                              </div>
-                            </li>
-                        </ul>
-                    </div>
-                  </nav>
+            <nav class="navbar navbar-expand-sm navbar-dark">
+                <a class="navbar-brand" href="/">Gun Violence in the USA</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                        
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto ">
+                            
+                        <li class="nav-item">
+                          <a class="nav-link active" href="/interactive_chart">Factors Chart</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="/maps">Map of Incidents</a>
+                        </li>
+    
+                        <li class="nav-item">
+                          <a class="nav-link" href="/benchmark">Laws Benchmark</a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="/wordcloud">Word Cloud</a>
+                        </li>
+                    </ul>
+                </div>
+              </nav>
+              
+              <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="box">
-                            <h1>Plotting Gun Violence</h1>
-                            <p>Here is another plot for your purposes</p>
+                            <h1>What factors affect incidence of gun violence?</h1>
                             
+                            <br>
                             <div id="scatter">
                                 <!--  chart here. -->
                               </div>
-                              <div class="clear">&nbsp;<br></div>
+                             <br>
+                            <p>The chart above examines how factors such as number of gun laws, median income, and population may affect the number of incidents of gun violence per state. Each plot point represents the number of gun violence incidents in a state reported for a year.</p>
+                            <p>There does not appear to be a clear relationship at state level between the number of gun laws versus incidents, nor does the state median income show an obvious effect on number of incidents. However, this dataset shows gun violence incidents clearly increase with state population size. Also, the chart shows the overall number of gun violence incidents increasing from 2014-2017.</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -59,7 +68,7 @@
         
         <footer id="sticky-footer" class="py-4 text-white-50">
             <div class="container text-center">
-                <small>Gun Incident data from <a href='https://openweathermap.org/'>Kaggle</a> accessed 06/07/2019</small>
+                <small>Gun Incident data from <a href='https://www.kaggle.com/jameslko/gun-violence-data'>Kaggle</a> accessed 06/07/2019</small>
             </div>
         </footer>
 
