@@ -49,7 +49,7 @@ function init(){
             var rec=data[Math.floor(Math.random()*data.length)];
             var mstr=rec.incident_characteristics || "";
             mstr=mstr.split("||").join("</br>");
-            var dt = rec.date;
+            var dt = rec.strdate;
             var str=dt+" - "+rec["city_or_county"]+", "+rec["state"]+"<br>"+mstr;
             var tdeg=5-Math.random()*10;
             $('#homemsg').css({"-webkit-transform":"rotate("+tdeg+"deg)", "transform":"rotate("+tdeg+"deg"});

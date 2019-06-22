@@ -159,7 +159,7 @@ function getViolence(yr){
         var loc = [+el.latitude,+el.longitude];
         var mstr=el.incident_characteristics || "";
         mstr=mstr.split("||").join("</br>");
-        var dt = el.date;
+        var dt = el.strdate;
         // Check for location property
         if (el.latitude) {
 
