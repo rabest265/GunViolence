@@ -2,13 +2,19 @@ from flask import Flask, render_template, redirect, jsonify
 from flask_pymongo import PyMongo
 from datetime import datetime
 import json
+import os
 # from bson.json_util import loads
 
 # Create an instance of Flask
 app = Flask(__name__)
 
 # Use PyMongo to establish Mongo connection
-mongo = PyMongo(app, uri="mongodb://localhost:27017/guns")
+MONGO_URI = os.environ.get('MONGO_URI')
+if not MONGO_URI:
+    MONGO_URI = "mongodb://localhost:27017/guns"
+
+app.config['MONGO_URI'] = MONGO_URI
+mongo = PyMongo(app)
 
 # Define shooting list
 ShootList = ["mass shooting", "no injuries", "injuries only", "some dead"]
