@@ -12,7 +12,7 @@ Jinja2==2.10
 jsonschema==2.6.0
 MarkupSafe==1.1.1
 matplotlib==3.0.3
-numpy==1.16.2
+numpy==1.22.0
 pandas==0.24.1
 PyGeoj==1.0.0
 Pygments==2.3.1
